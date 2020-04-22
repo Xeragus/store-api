@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LocationWasAdded;
 use App\Repositories\Contracts\LocationRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Location;
@@ -10,11 +11,12 @@ class LocationCreateController extends Controller
 {
     public function create(Request $request, LocationRepositoryInterface $locationRepository)
     {
-        try{
-
+        try {
             $location = new Location($request->all());
 
             $locationRepository->store($location);
+
+            event(new LocationWasAdded($location));
 
             return response()->json([
                 'error' => false,

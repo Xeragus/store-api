@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Listeners;
-
 
 use App\Events\LocationWasAdded;
 use App\Mail\LocationAddedNotificationMail;
@@ -15,7 +13,5 @@ class SendAddedLocationNotificationEmail
         $location = $locationWasAdded->getLocation();
 
         Mail::to($location->getCompany()->getEmail())->send(new LocationAddedNotificationMail($location));
-
     }
-
 }

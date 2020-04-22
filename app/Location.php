@@ -17,7 +17,7 @@ class Location extends Model
 
     public function getCompany()
     {
-        return $this->company()->get();
+        return $this->company;
     }
 
     public function setCompany(Company $company)
