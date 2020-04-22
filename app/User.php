@@ -36,4 +36,14 @@ class User extends Authenticatable
     {
       return $this->hasMany(Product::class);
     }
+
+    public function getEmail():string
+    {
+        return $this->getAttribute('email');
+    }
+
+    public function getName(): string
+    {
+        return $this->getAttribute('name');
+    }
 }

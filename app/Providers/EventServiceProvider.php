@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\ProductWasCreated;
+use App\Events\UserWasRegistered;
 use App\Listeners\SendProductCreationNotificationEmailToCompany;
+use App\Listeners\SendRegistrationEmailToUser;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,9 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ProductWasCreated::class => [
             SendProductCreationNotificationEmailToCompany::class,
-            SendProductCreationNotificationEmailToCompany::class,
-            SendProductCreationNotificationEmailToCompany::class,
-            SendProductCreationNotificationEmailToCompany::class,
+        ],
+        UserWasRegistered::class => [
+            SendRegistrationEmailToUser::class
         ]
     ];
 

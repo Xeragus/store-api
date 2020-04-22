@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserWasRegistered;
 use App\Repostiories\Contracts\UserRepositoryInterface;
 use App\User;
 use Illuminate\Http\Request;
@@ -14,6 +15,8 @@ class UserCreateController extends Controller
             $user = new User($request->all());
 
             $userRepository->store($user);
+
+            event(new UserWasRegistered($user));
 
             return response()->json([
                 'error' => false,
