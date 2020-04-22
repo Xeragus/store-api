@@ -42,3 +42,10 @@ Route::prefix('users')->group(function() {
     Route::post('/create', 'UserCreateController@create');
     Route::delete('/{id}', 'UserDeleteController@delete');
 });
+
+Route::prefix('locations')->group(function () {
+    Route::get('/','LocationIndexController@index');
+    Route::get('/{id}', 'LocationShowController@show');
+    Route::delete('/{id}', 'LocationDeleteController@delete');
+    Route::post('/create', 'LocationCreateController@create');
+});

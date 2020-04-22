@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Location;
 
 class Company extends Model
 {
@@ -25,5 +26,10 @@ class Company extends Model
     public function getEmail()
     {
         return $this->getAttribute('email');
+    }
+
+    public function locations()
+    {
+        return $this->hasMany('Location');
     }
 }

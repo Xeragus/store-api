@@ -16,7 +16,8 @@ class CompaniesTableSeeder extends Seeder
 
         $company->name = 'Filip DOOEL';
         $company->address = 'Blagoj Davkov';
-      
+        $company->email = 'filip@email.com';
+
 
         $company->save();
     }

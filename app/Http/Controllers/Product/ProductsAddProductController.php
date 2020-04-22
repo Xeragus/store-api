@@ -15,26 +15,6 @@ class ProductsController extends Controller
      */
     private $productRepository;
 
-    public function __construct(ProductRepositoryInterface $productRepository)
-    {
-        $this->productRepository = $productRepository;
-    }
-
-    public function index()
-    {
-      $products = $this->productRepository->all();
-
-      return response()->json($products);
-    }
-
-    public function getById(int $id)
-    {
-//        $product = Product::find($id);
-        $product = $this->productRepository->get($id);
-
-        return response()->json(['product' => $product]);
-    }
-
     public function addProduct(Request $request, CompanyRepositoryInterface $companyRepository)
     {
         $product = new Product();
@@ -60,26 +40,4 @@ class ProductsController extends Controller
         return response()->json(['Product successfully stored.']);
     }
 
-    public function getByName(Request $request)
-    {
-        $name = $request->get('name', '');
-
-        $products = $this->productRepository->getByName($name);
-
-        return response()->json($products);
-    }
-
-    public function delete(int $id)
-    {
-        // da se refaktorira so find or fail
-        $product = $this->productRepository->get($id);
-
-        if (!$product) {
-            return response()->json(['The product with the given id does not exist.']);
-        }
-
-        $this->productRepository->delete($product);
-
-        return response()->json(['Product successfully deleted.']);
-    }
 }

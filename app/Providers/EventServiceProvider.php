@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Events\LocationWasAdded;
+use App\Events\LocationWasDeleted;
 use App\Events\ProductWasCreated;
 use App\Events\UserWasRegistered;
+use App\Listeners\SendAddedLocationNotificationEmail;
+use App\Listeners\SendDeletedLocationNotificationEmail;
 use App\Listeners\SendProductCreationNotificationEmailToCompany;
 use App\Listeners\SendRegistrationEmailToUser;
 use Illuminate\Auth\Events\Registered;
@@ -22,9 +26,19 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+
         ProductWasCreated::class => [
-            SendProductCreationNotificationEmailToCompany::class,
+            SendProductCreationNotificationEmailToCompany::class
         ],
+
+        LocationWasAdded::class => [
+            SendAddedLocationNotificationEmail::class
+        ],
+
+        LocationWasDeleted::class => [
+            SendDeletedLocationNotificationEmail::class
+        ],
+
         UserWasRegistered::class => [
             SendRegistrationEmailToUser::class
         ]
