@@ -25,6 +25,21 @@ class Product extends Model
       ->withTimestamps();
     }
 
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
+    }
+
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function setCategory(Category $category)
+    {
+        $this->category()->associate($category);
+    }
+
     public function company()
     {
       return $this->belongsTo('App\Company');
