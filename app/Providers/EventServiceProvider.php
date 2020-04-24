@@ -6,6 +6,7 @@ use App\Events\LocationWasAdded;
 use App\Events\LocationWasDeleted;
 use App\Events\ProductWasCreated;
 use App\Events\UserWasRegistered;
+use App\Listeners\LogUserRegistration;
 use App\Listeners\SendAddedLocationNotificationEmail;
 use App\Listeners\SendDeletedLocationNotificationEmail;
 use App\Listeners\SendProductCreationNotificationEmailToCompany;
@@ -40,7 +41,8 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         UserWasRegistered::class => [
-            SendRegistrationEmailToUser::class
+            SendRegistrationEmailToUser::class,
+            LogUserRegistration::class
         ]
     ];
 

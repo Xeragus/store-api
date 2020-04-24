@@ -17,5 +17,4 @@ class LocationWasDeleted
     {
         return $this->location;
     }
-
 }

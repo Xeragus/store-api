@@ -1,11 +1,12 @@
 <?php
+
+namespace App\Http\Controllers;
+
 use App\Order;
 use App\Product;
-use App\User;
 use Illuminate\Http\Request;
-use Exception;
 
-class OrdersController extends Controller
+class AddProductToOrderController extends Controller
 {
     public function addProduct(Request $request)
     {
@@ -19,7 +20,7 @@ class OrdersController extends Controller
             $product = Product::findOrFail($productId);
 
             $order->products()->attach($product, ['quantity' => $quantity]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return response()->json([
                 'error' => true,
                 'message' => $e->getMessage()

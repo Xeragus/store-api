@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories\Contracts;
 
 use App\Location;
@@ -18,5 +19,4 @@ interface LocationRepositoryInterface
     public function getByNumber(int $num) : array;
 
     public function getByCorrectAddress(string $address) : array ;
-
 }

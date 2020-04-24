@@ -1,13 +1,12 @@
 <?php
-use App\Order;
-use App\Product;
-use App\User;
-use Illuminate\Http\Request;
-use Exception;
 
-class OrdersController extends Controller
+namespace App\Http\Controllers;
+
+use App\Order;
+use App\User;
+
+class OrderIndexController extends Controller
 {
-    
     public function index()
     {
         try {
@@ -17,7 +16,7 @@ class OrdersController extends Controller
 
             return response()->json(['orders' => $orders]);
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return response()->json([
                 'error' => true,
                 'message' => $e->getMessage()

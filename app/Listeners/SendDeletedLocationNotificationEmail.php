@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Mail;
 
 class SendDeletedLocationNotificationEmail
 {
-    public function handle(LocationWasDeletes $locationWasDeleted)
+    public function handle(LocationWasDeleted $locationWasDeleted)
     {
         $location = $locationWasDeleted->getLocation();
 
