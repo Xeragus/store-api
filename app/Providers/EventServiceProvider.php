@@ -5,9 +5,11 @@ namespace App\Providers;
 use App\Events\LocationWasAdded;
 use App\Events\LocationWasDeleted;
 use App\Events\ProductWasCreated;
+use app\Events\CategoryWasCreated;
 use App\Events\UserWasRegistered;
 use App\Listeners\LogUserRegistration;
 use App\Listeners\SendAddedLocationNotificationEmail;
+use App\Listeners\SendCreatedCategoryNotificationEmail;
 use App\Listeners\SendDeletedLocationNotificationEmail;
 use App\Listeners\SendProductCreationNotificationEmailToCompany;
 use App\Listeners\SendRegistrationEmailToUser;
@@ -29,7 +31,10 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         ProductWasCreated::class => [
-            SendProductCreationNotificationEmailToCompany::class
+            SendProductCreationNotificationEmailToCompany::class,
+            SendProductCreationNotificationEmailToCompany::class,
+            SendProductCreationNotificationEmailToCompany::class,
+            SendProductCreationNotificationEmailToCompany::class,
         ],
 
         LocationWasAdded::class => [
@@ -43,6 +48,10 @@ class EventServiceProvider extends ServiceProvider
         UserWasRegistered::class => [
             SendRegistrationEmailToUser::class,
             LogUserRegistration::class
+        ],
+
+        CategoryWasCreated::class => [
+            SendCreatedCategoryNotificationEmail::class
         ]
     ];
 
