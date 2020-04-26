@@ -26,12 +26,15 @@ Route::prefix('products')->group(function () {
     Route::get('/{id}/company', 'ProductsController@getCompany'); // api/products/{id}/company
 });
 
-Route::post('/orders/add-product', 'OrdersController@addProduct');
-Route::get('/orders', 'OrdersController@index');
+Route::prefix('orders')->group(function (){
+    Route::post('/add-product', 'OrdersController@addProduct');
+    Route::get('/', 'OrdersController@index');
+});
 
 Route::prefix('companies')->group(function () {
   Route::get('/', 'CompaniesIndexController@index'); // /companies
-  Route::post('/create', 'CompaniesCreateController@create')->middleware(\App\Http\Middleware\CheckCompanyCreateData::class); // /companies
+  Route::post('/create', 'CompaniesCreateController@create')
+      ->middleware(\App\Http\Middleware\CheckCompanyCreateData::class); // /companies
   Route::get('/{id}', 'CompaniesIndexController@getCompany'); // /companies/{id}
   Route::get('/{id}/products', 'CompaniesProductsController@getProducts'); // /companies/{id}/products
 });
@@ -48,4 +51,11 @@ Route::prefix('locations')->group(function () {
     Route::get('/{id}', 'LocationShowController@show');
     Route::delete('/{id}', 'LocationDeleteController@delete');
     Route::post('/create', 'LocationCreateController@create');
+});
+
+Route::prefix('categories')->group(function (){
+    Route::get('/', 'CategoriesIndexController@index');
+    Route::get('/{id}', 'CategoriesShowController@show');
+    Route::post('/create', 'CategoriesCreateController@create');
+    Route::delete('/{id}', 'CategoriesDeleteController@delete');
 });

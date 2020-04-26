@@ -9,12 +9,20 @@ class Company extends Model
 {
     protected $table = 'companies';
 
-    protected $fillable = ['name', 'address'];
+    protected $fillable = [
+        'name',
+        'address',
+        'email'];
 
     public function products()
     {
       // this returns a relation
       return $this->hasMany('App\Product');
+    }
+
+    public function locations()
+    {
+        return $this->hasMany('Location');
     }
 
     public function getProducts()
@@ -28,8 +36,4 @@ class Company extends Model
         return $this->getAttribute('email');
     }
 
-    public function locations()
-    {
-        return $this->hasMany('Location');
-    }
 }

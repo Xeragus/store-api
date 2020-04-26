@@ -5,13 +5,14 @@ namespace App\Providers;
 use App\Events\LocationWasAdded;
 use App\Events\LocationWasDeleted;
 use App\Events\ProductWasCreated;
+use app\Events\CategoryWasCreated;
 use App\Listeners\SendAddedLocationNotificationEmail;
+use App\Listeners\SendCreatedCategoryNotificationEmail;
 use App\Listeners\SendDeletedLocationNotificationEmail;
 use App\Listeners\SendProductCreationNotificationEmailToCompany;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -38,6 +39,10 @@ class EventServiceProvider extends ServiceProvider
 
         LocationWasDeleted::class => [
             SendDeletedLocationNotificationEmail::class
+        ],
+
+        CategoryWasCreated::class => [
+            SendCreatedCategoryNotificationEmail::class
         ]
     ];
 

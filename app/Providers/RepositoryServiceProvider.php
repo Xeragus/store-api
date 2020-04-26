@@ -8,7 +8,9 @@ use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Repositories\EloquentCompanyRepository;
 use App\Repositories\EloquentLocationRepository;
 use App\Repositories\EloquentProductRepository;
+use App\Repostiories\Contracts\CategoriesRepositoryInterface;
 use App\Repostiories\Contracts\UserRepositoryInterface;
+use App\Repostiories\EloquentCategoryRepository;
 use App\Repostiories\EloquentUserRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -34,6 +36,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
           LocationRepositoryInterface::class,
           EloquentLocationRepository::class
+        );
+
+        $this->app->bind(
+            CategoriesRepositoryInterface::class,
+            EloquentCategoryRepository::class
         );
     }
 }
