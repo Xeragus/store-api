@@ -9,14 +9,7 @@ class Company extends Model
 {
     protected $table = 'companies';
 
-<<<<<<< HEAD
     protected $fillable = ['name', 'address', 'email'];
-=======
-    protected $fillable = [
-        'name',
-        'address',
-        'email'];
->>>>>>> origin/group1
 
     public function products()
     {
