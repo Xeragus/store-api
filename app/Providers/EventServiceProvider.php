@@ -6,11 +6,8 @@ use App\Events\LocationWasAdded;
 use App\Events\LocationWasDeleted;
 use App\Events\ProductWasCreated;
 use app\Events\CategoryWasCreated;
-<<<<<<< HEAD
 use App\Events\UserWasRegistered;
 use App\Listeners\LogUserRegistration;
-=======
->>>>>>> origin/group1
 use App\Listeners\SendAddedLocationNotificationEmail;
 use App\Listeners\SendCreatedCategoryNotificationEmail;
 use App\Listeners\SendDeletedLocationNotificationEmail;
@@ -33,10 +30,7 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         ProductWasCreated::class => [
-            SendProductCreationNotificationEmailToCompany::class,
-            SendProductCreationNotificationEmailToCompany::class,
-            SendProductCreationNotificationEmailToCompany::class,
-            SendProductCreationNotificationEmailToCompany::class,
+            SendProductCreationNotificationEmailToCompany::class
         ],
 
         LocationWasAdded::class => [
@@ -47,14 +41,11 @@ class EventServiceProvider extends ServiceProvider
             SendDeletedLocationNotificationEmail::class
         ],
 
-<<<<<<< HEAD
         UserWasRegistered::class => [
             SendRegistrationEmailToUser::class,
             LogUserRegistration::class
         ],
 
-=======
->>>>>>> origin/group1
         CategoryWasCreated::class => [
             SendCreatedCategoryNotificationEmail::class
         ]
