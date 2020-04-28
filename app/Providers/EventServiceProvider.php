@@ -6,8 +6,11 @@ use App\Events\LocationWasAdded;
 use App\Events\LocationWasDeleted;
 use App\Events\ProductWasCreated;
 use app\Events\CategoryWasCreated;
+<<<<<<< HEAD
 use App\Events\UserWasRegistered;
 use App\Listeners\LogUserRegistration;
+=======
+>>>>>>> origin/group1
 use App\Listeners\SendAddedLocationNotificationEmail;
 use App\Listeners\SendCreatedCategoryNotificationEmail;
 use App\Listeners\SendDeletedLocationNotificationEmail;
@@ -16,7 +19,6 @@ use App\Listeners\SendRegistrationEmailToUser;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -45,11 +47,14 @@ class EventServiceProvider extends ServiceProvider
             SendDeletedLocationNotificationEmail::class
         ],
 
+<<<<<<< HEAD
         UserWasRegistered::class => [
             SendRegistrationEmailToUser::class,
             LogUserRegistration::class
         ],
 
+=======
+>>>>>>> origin/group1
         CategoryWasCreated::class => [
             SendCreatedCategoryNotificationEmail::class
         ]
