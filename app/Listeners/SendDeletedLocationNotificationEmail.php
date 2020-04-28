@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Listeners;
 
 use App\Events\LocationWasDeleted;
@@ -14,7 +13,5 @@ class SendDeletedLocationNotificationEmail
         $location = $locationWasDeleted->getLocation();
 
         Mail::to($location->getCompany()->getEmail())->send(new LocationWasDeletedNotificationMail($location));
-
     }
-
 }

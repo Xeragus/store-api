@@ -17,6 +17,11 @@ class Company extends Model
       return $this->hasMany('App\Product');
     }
 
+    public function locations()
+    {
+        return $this->hasMany('Location');
+    }
+
     public function getProducts()
     {
       // this returns the actual database rows as Product objects
@@ -28,8 +33,4 @@ class Company extends Model
         return $this->getAttribute('email');
     }
 
-    public function locations()
-    {
-        return $this->hasMany('Location');
-    }
 }

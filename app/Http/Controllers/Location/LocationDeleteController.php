@@ -1,6 +1,8 @@
 <?php
+
 namespace App\Http\Controllers;
 
+use App\Events\LocationWasDeleted;
 use App\Repositories\Contracts\LocationRepositoryInterface;
 
 class LocationDeleteController extends Controller
@@ -12,9 +14,11 @@ class LocationDeleteController extends Controller
 
             $locationRepository->delete($location);
 
+            event(new LocationWasDeleted($location));
+
             return response()->json([
                 'error' => false,
-                'message' => 'location is deleted'
+                'message' => 'Location is deleted'
             ]);
         } catch (\Exception $e) {
             return response()->json([

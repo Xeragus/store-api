@@ -1,8 +1,8 @@
 <?php
 
-
 namespace App\Events;
 
+use App\Location;
 
 class LocationWasDeleted
 {

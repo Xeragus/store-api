@@ -24,6 +24,10 @@ class Product extends Model
       )->withPivot('quantity')
       ->withTimestamps();
     }
+    public function category()
+    {
+        return $this->hasMany('App\Category');
+    }
 
     public function company()
     {
@@ -38,6 +42,21 @@ class Product extends Model
     public function setCompany(Company $company)
     {
         $this->company()->associate($company);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function setUser(User $user)
+    {
+        $this->user()->associate($user);
+    }
+
+    public function getUser(): User
+    {
+        return $this->user()->get()->first();
     }
 
     public function getName(): string
@@ -68,21 +87,6 @@ class Product extends Model
     public function setPrice(float $price)
     {
         $this->setAttribute('price', $price);
-    }
-
-    public function user()
-    {
-      return $this->belongsTo(User::class);
-    }
-
-    public function setUser(User $user)
-    {
-        $this->user()->associate($user);
-    }
-
-    public function getUser(): User
-    {
-        return $this->user()->get()->first();
     }
 
 }
