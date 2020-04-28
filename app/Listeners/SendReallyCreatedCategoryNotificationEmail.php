@@ -2,15 +2,15 @@
 
 namespace App\Listeners;
 
-use App\Events\CategoryWasCreated;
+use App\Events\CategoryWasReallyCreated;
 use App\Mail\CategoryCreatedNotificationMail;
 use Illuminate\Support\Facades\Mail;
 
-class SendCreatedCategoryNotificationEmail
+class SendReallyCreatedCategoryNotificationEmail
 {
-    public function handle(CategoryWasCreated $categoryWasCreated)
+    public function handle(CategoryWasReallyCreated $event)
     {
-        $category = $categoryWasCreated->getCategory();
+        $category = $event->getCategory();
 
         Mail::to('boobs@test.com')->send(new CategoryCreatedNotificationMail($category));
     }

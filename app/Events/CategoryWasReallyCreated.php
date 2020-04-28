@@ -4,7 +4,7 @@ namespace App\Events;
 
 use App\Category;
 
-class CategoryWasCreated
+class CategoryWasReallyCreated
 {
     private $category;
 
@@ -13,7 +13,7 @@ class CategoryWasCreated
         $this->category = $category;
     }
 
-    public function getCategory()
+    public function getCategory(): Category
     {
         return $this->category;
     }
