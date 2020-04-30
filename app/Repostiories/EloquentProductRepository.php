@@ -17,6 +17,11 @@ class EloquentProductRepository implements ProductRepositoryInterface
         return Product::find($id);
     }
 
+    public function findOrFail(int $id): Product
+    {
+        return Product::findOrFail($id);
+    }
+
     public function store(Product $product)
     {
         $product->save();
