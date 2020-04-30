@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Mail;
 
 class SendAddedLocationNotificationEmail
 {
-
-
     public function handle(LocationWasAdded $locationWasAdded)
     {
         $location = $locationWasAdded->getLocation();

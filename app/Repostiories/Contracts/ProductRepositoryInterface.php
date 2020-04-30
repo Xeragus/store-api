@@ -10,6 +10,8 @@ interface ProductRepositoryInterface
 
     public function get(int $id): ?Product;
 
+    public function findOrFail(int $id): Product;
+
     public function store(Product $product);
 
     public function delete(Product $product);

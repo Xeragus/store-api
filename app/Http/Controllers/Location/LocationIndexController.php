@@ -15,7 +15,7 @@ class LocationIndexController extends Controller
             return response()->json([
                 'error' => false,
                 'message' => 'Here are all the locations in the database',
-                'item' => $locationRepository->all()
+                'items' => $locationRepository->all()
             ]);
         } catch (\Exception $e) {
             return response()->json([

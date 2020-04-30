@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Order extends Model
 {
+    const STATE_CREATED = 'created';
+    const STATE_PAID = 'paid';
+
     public function products()
     {
         return $this->belongsToMany(
@@ -16,6 +19,24 @@ class Order extends Model
             'product_id'
         )->withPivot('quantity')
         ->withTimestamps();
+    }
+
+    public function addProduct(Product $product, float $quantity)
+    {
+        $this->products()->attach($product, ['quantity' => $quantity]);
+    }
+
+    public function removeProduct(Product $product)
+    {
+        $this->products()->detach($product);
+    }
+
+    public function getProduct(Product $product)
+    {
+        return $this->products()
+            ->where('product_id', $product->getId())
+            ->withPivot(['quantity'])
+            ->get()->first();
     }
 
     public function user(): BelongsTo
@@ -43,12 +64,30 @@ class Order extends Model
         $this->setAttribute('price', $price);
     }
 
+    public function getState(): string
+    {
+        return $this->getAttribute('state');
+    }
+
+    public function setState(string $state)
+    {
+        if (
+            $state !== self::STATE_PAID
+            && $state !== self::STATE_CREATED
+        ) {
+            throw new \Exception('The given order state does not exists');
+        }
+
+        $this->setAttribute('state', $state);
+    }
+
     public function jsonSerialize()
     {
         return [
             'id' => $this->id,
+            'state' => $this->getState(),
             'user' => $this->getUser(),
-            'products' => $this->products()->get()->all()
+            'products' => $this->products()->get()->all(),
         ];
     }
 }
