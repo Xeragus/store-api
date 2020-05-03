@@ -9,6 +9,11 @@ class EloquentCompanyRepository implements CompanyRepositoryInterface
 {
     public function get(int $id): ?Company
     {
+        return Company::find($id);
+    }
+
+    public function findOrFail(int $id): Company
+    {
         return Company::findOrFail($id);
     }
 

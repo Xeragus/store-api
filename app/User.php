@@ -27,6 +27,11 @@ class User extends Authenticatable
         'password', 'updated_at'
     ];
 
+    public function getId(): int
+    {
+        return (int) $this->getAttribute('id');
+    }
+
     public function orders()
     {
       return $this->hasMany(Order::class, 'user_id', 'id');

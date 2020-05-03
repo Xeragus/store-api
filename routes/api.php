@@ -28,6 +28,7 @@ Route::prefix('products')->group(function () {
 
 Route::prefix('orders')->group(function (){
     Route::post('/add-product', 'OrdersController@addProduct');
+    Route::post('/remove-product', 'OrdersController@removeProduct');
     Route::get('/', 'OrdersController@index');
 });
 

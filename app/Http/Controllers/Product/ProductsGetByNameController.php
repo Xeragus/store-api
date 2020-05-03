@@ -13,8 +13,6 @@ class ProductsController extends Controller
 {
 	private $productRepository;
 
-    
-
     public function getByName(Request $request)
     {
         $name = $request->get('name', '');

@@ -14,6 +14,11 @@ class Product extends Model
         'price'
     ];
 
+    public function getId(): int
+    {
+        return (int) $this->getAttribute('id');
+    }
+
     public function orders()
     {
       return $this->belongsToMany(

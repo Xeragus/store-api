@@ -8,14 +8,19 @@ class Location extends Model
 {
     protected $table = 'locations';
 
-    protected $fillable = [ 'address', 'address_number', 'entry', 'company_id'];
+    protected $fillable = ['address', 'address_number', 'entry', 'company_id'];
+
+    public function getId(): int
+    {
+        return (int) $this->getAttribute('id');
+    }
 
     public function company()
     {
         return $this->belongsTo(Company::class);
     }
 
-    public function getCompany()
+    public function getCompany(): Company
     {
         return $this->company;
     }
@@ -55,10 +60,14 @@ class Location extends Model
         $this->setAttribute('entry', $entry);
     }
 
-
-
-
-
-
-
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'address' => $this->getAddress(),
+            'address_number' => $this->getAddressNumber(),
+            'entry' => $this->getEntry(),
+            'company_id' => $this->getCompany()->getId()
+        ];
+    }
 }
