@@ -38,4 +38,20 @@ class Company extends Model
         return $this->getAttribute('email');
     }
 
+    public function setEmail(string $email)
+    {
+        $this->setAttribute('email', $email);
+    }
+
+    public function setName(string $name)
+    {
+        $this->setAttribute('name', $name);
+    }
+
+    public function setAddress(string $address)
+    {
+        $this->setAttribute('address', $address);
+    }
+
+
 }

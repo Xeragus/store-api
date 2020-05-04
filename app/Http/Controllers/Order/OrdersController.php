@@ -38,20 +38,14 @@ class OrdersController
             );
 
             if (!$order) {
-                $order = new Order();
-                $order->setUser($user);
-                $order->setPrice(0);
-                $order->setState(Order::STATE_CREATED);
+                $order = dispatch_now(new Order\CreateOrderCommand($user));
 
                 $this->orderRepository->store($order);
             }
 
             $product = $productRepository->findOrFail($productId);
 
-            $order->addProduct($product, $quantity);
-
-            $currentPrice = $order->getPrice();
-            $order->setPrice($currentPrice + $product->getPrice() * $quantity);
+            dispatch_now(new Order\AddProductToOrderCommand($order, $product, $quantity));
 
             $this->orderRepository->store($order);
 
