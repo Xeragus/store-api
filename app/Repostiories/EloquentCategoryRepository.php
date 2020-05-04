@@ -26,6 +26,11 @@ class EloquentCategoryRepository implements CategoriesRepositoryInterface
 
     public function get(int $id) : ?Category
     {
+        return Category::find($id);
+    }
+
+    public function findOrFail(int $id) : Category
+    {
         return Category::findOrFail($id);
     }
 

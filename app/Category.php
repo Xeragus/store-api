@@ -16,17 +16,12 @@ class Category extends Model
 
     public function product()
     {
-        return $this->belongsTo(Product::class);
-    }
-
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-    public function setProduct(Product $product)
-    {
-        $this->product()->associate($product);
+        return $this->belongsToMany(
+            Product::class,
+            'categories_products',
+            'category_id',
+            'product_id'
+        )->withTimestamps();
     }
 
     public function getName(): string

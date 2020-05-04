@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('products')->group(function () {
     Route::get('/', 'ProductsController@index'); // api/products
-    Route::post('/create', 'ProductsController@addProduct'); // api/products/create
+    Route::post('/create', 'ProductsController@create'); // api/products/create
     Route::get('/get-by-name', 'ProductsController@getByName'); // api/products/get-by-name
     Route::get('/{id}', 'ProductsController@getById'); // api/products/{id}
     Route::delete('/{id}', 'ProductsController@delete'); // api/products/{id}
@@ -55,8 +55,11 @@ Route::prefix('locations')->group(function () {
 });
 
 Route::prefix('categories')->group(function (){
-    Route::get('/', 'CategoriesIndexController@index');
-    Route::get('/{id}', 'CategoriesShowController@show');
-    Route::post('/create', 'CategoriesCreateController@create');
-    Route::delete('/{id}', 'CategoriesDeleteController@delete');
+//    Route::get('/', 'CategoriesIndexController@index');
+//    Route::get('/{id}', 'CategoriesShowController@show');
+//    Route::post('/create', 'CategoriesCreateController@create');
+//    Route::delete('/{id}', 'CategoriesDeleteController@delete');
+
+    Route::post('/create-with-command', 'CategoriesController@createWithCommand');
+    Route::post('/create-with-factory', 'CategoriesController@createWithFactory');
 });

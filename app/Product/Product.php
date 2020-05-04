@@ -16,22 +16,33 @@ class Product extends Model
 
     public function getId(): int
     {
-        return (int) $this->getAttribute('id');
+        return (int)$this->getAttribute('id');
     }
 
     public function orders()
     {
-      return $this->belongsToMany(
-          Order::class,
-          'orders_products',
-          'product_id',
-          'order_id'
-      )->withPivot('quantity')
-      ->withTimestamps();
+        return $this->belongsToMany(
+            Order::class,
+            'orders_products',
+            'product_id',
+            'order_id'
+        )->withPivot('quantity')
+            ->withTimestamps();
     }
+
     public function category()
     {
-        return $this->hasMany('App\Category');
+        return $this->belongsToMany(
+            Category::class,
+            'categories_products',
+            'product_id',
+            'category_id'
+        )->withTimestamps();
+    }
+
+    public function addCategory(Category $category)
+    {
+        $this->category()->attach($category);
     }
 
     public function company()

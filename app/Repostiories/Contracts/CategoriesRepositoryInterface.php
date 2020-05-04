@@ -14,5 +14,7 @@ interface CategoriesRepositoryInterface
 
     public function get(int $id): ?Category;
 
+    public function findOrFail(int $id): ?Category;
+
     public function delete(Category $category);
 }
