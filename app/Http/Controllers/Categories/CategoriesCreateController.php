@@ -10,15 +10,24 @@ use Illuminate\Http\Request;
 
 class CategoriesCreateController extends Controller
 {
-    public function create(Request $request, CategoriesRepositoryInterface $categoriesRepository)
+    public function create(
+        Request $request,
+        CategoriesRepositoryInterface $categoriesRepository,
+        ProductFactory $productFactory
+    )
     {
         try {
-            $category = new Category($request->all());
+//            $category = new Category($request->all());
+//
+//            $categoriesRepository->store($category);
+//
+//            event(new CategoryWasCreated($category));
+//            event(new CategoryWasReallyCreated($category));
 
+//            dispatch_now(new Category\Commands\CreateCategoryFromData($request->all()));
+
+            $category = $productFactory->make($request->all());
             $categoriesRepository->store($category);
-
-            event(new CategoryWasCreated($category));
-            event(new CategoryWasReallyCreated($category));
 
             return response()->json([
                 'error' => false,
