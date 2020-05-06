@@ -18,12 +18,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix('products')->group(function () {
-    Route::get('/', 'ProductsController@index'); // api/products
-    Route::post('/create', 'ProductsController@create'); // api/products/create
-    Route::get('/get-by-name', 'ProductsController@getByName'); // api/products/get-by-name
-    Route::get('/{id}', 'ProductsController@getById'); // api/products/{id}
-    Route::delete('/{id}', 'ProductsController@delete'); // api/products/{id}
-    Route::get('/{id}/company', 'ProductsController@getCompany'); // api/products/{id}/company
+    Route::group(['middleware' => 'auth:api'], function() {
+        Route::get('/', 'ProductsIndexController@index'); // api/products
+        Route::post('/create', 'ProductsController@create'); // api/products/create
+        Route::get('/get-by-name', 'ProductsController@getByName'); // api/products/get-by-name
+        Route::get('/{id}', 'ProductsController@getById'); // api/products/{id}
+        Route::delete('/{id}', 'ProductsController@delete'); // api/products/{id}
+        Route::get('/{id}/company', 'ProductsController@getCompany'); // api/products/{id}/company
+    });
 });
 
 Route::prefix('orders')->group(function (){
@@ -33,11 +35,13 @@ Route::prefix('orders')->group(function (){
 });
 
 Route::prefix('companies')->group(function () {
-  Route::get('/', 'CompaniesIndexController@index'); // /companies
-  Route::post('/create', 'CompaniesCreateController@create')
-      ->middleware(\App\Http\Middleware\CheckCompanyCreateData::class); // /companies
-  Route::get('/{id}', 'CompaniesIndexController@getCompany'); // /companies/{id}
-  Route::get('/{id}/products', 'CompaniesProductsController@getProducts'); // /companies/{id}/products
+    Route::group(['middleware' => 'auth:api'], function() {
+        Route::get('/', 'CompaniesIndexController@index'); // /companies
+        Route::post('/create', 'CompaniesCreateController@create')
+            ->middleware(\App\Http\Middleware\CheckCompanyCreateData::class); // /companies
+        Route::get('/{id}', 'CompaniesIndexController@getCompany'); // /companies/{id}
+        Route::get('/{id}/products', 'CompaniesProductsController@getProducts'); // /companies/{id}/products
+    });
 });
 
 Route::prefix('users')->group(function() {
@@ -62,4 +66,14 @@ Route::prefix('categories')->group(function (){
 
     Route::post('/create-with-command', 'CategoriesController@createWithCommand');
     Route::post('/create-with-factory', 'CategoriesController@createWithFactory');
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
+], function ($router) {
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
 });
