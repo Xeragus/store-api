@@ -30,7 +30,7 @@ class AddCompanyIdToProductsTable extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-          $table->dropForeignKey(['company_id']);
+          $table->dropForeign(['company_id']);
           $table->dropColumn('company_id');
         });
     }
