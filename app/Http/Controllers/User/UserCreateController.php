@@ -6,13 +6,17 @@ use App\Events\UserWasRegistered;
 use App\Repostiories\Contracts\UserRepositoryInterface;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserCreateController extends Controller
 {
     public function create(Request $request, UserRepositoryInterface $userRepository)
     {
+        $data = $request->all();
+
         try {
-            $user = new User($request->all());
+            $data['password'] = Hash::make($request->get('password'));
+            $user = new User($data);
 
             $userRepository->store($user);
 

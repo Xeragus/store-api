@@ -39,8 +39,11 @@ Route::prefix('companies')->group(function () {
         Route::get('/', 'CompaniesIndexController@index'); // /companies
         Route::post('/create', 'CompaniesCreateController@create')
             ->middleware(\App\Http\Middleware\CheckCompanyCreateData::class); // /companies
-        Route::get('/{id}', 'CompaniesIndexController@getCompany'); // /companies/{id}
-        Route::get('/{id}/products', 'CompaniesProductsController@getProducts'); // /companies/{id}/products
+
+        Route::group(['middleware' => 'company.ownership'], function() {
+            Route::get('/{id}', 'CompaniesIndexController@getCompany'); // /companies/{id}
+            Route::get('/{id}/products', 'CompaniesProductsController@getProducts'); // /companies/{id}/products
+        });
     });
 });
 

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Company\Commands;
-
 
 use App\Company;
 use App\Repositories\Contracts\CompanyRepositoryInterface;
@@ -21,11 +19,7 @@ class CreateCompanyFromDataCommand
 
     public function handle(CompanyRepositoryInterface $companyRepository)
     {
-        $company = new Company();
-
-        $company->setName($this->data['name']);
-        $company->setAddress($this->data['address']);
-        $company->setEmail($this->data['email']);
+        $company = new Company($this->data);
 
         $companyRepository->store($company);
     }
