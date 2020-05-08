@@ -9,6 +9,7 @@ use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Repostiories\Contracts\CategoriesRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Product\Factories\ProductFactory;
+use Mockery\Exception;
 
 class ProductsController extends Controller
 {
@@ -45,5 +46,57 @@ class ProductsController extends Controller
             'error' => false,
             'message' => 'Product successfully created.'
         ]);
+    }
+
+    public function show(int $id, ProductRepositoryInterface $productRepository)
+    {
+        try{
+            return response()->json([
+                'error' => false,
+                'message' => 'Here is the product with id = ' . $id,
+                'product' => $productRepository->findOrFail($id)
+            ]);
+        }catch (Exception $e){
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function delete(int $id, ProductRepositoryInterface $productRepository)
+    {
+        try{
+            $product = $productRepository->findOrFail($id);
+
+            $productRepository->delete($product);
+
+            return response()->json([
+                'error' => false,
+                'message' => 'Product with id = '. $id . ' successfully deleted'
+            ]);
+
+        } catch (\Exception $e){
+            return response()->json([
+                'error' => true,
+                'message'=> $e->getMessage()
+            ]);
+        }
+    }
+
+    public function index(ProductRepositoryInterface $productRepository)
+    {
+        try{
+            return response()->json([
+                'error' => false,
+                'message' => 'Here are all the products',
+                'item' => $productRepository->all()
+            ]);
+        } catch (\Exception $e){
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 }

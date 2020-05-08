@@ -6,6 +6,7 @@ use App\Order;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Repostiories\Contracts\OrderRepositoryInterface;
 use App\Repostiories\Contracts\UserRepositoryInterface;
+use App\User;
 use Illuminate\Http\Request;
 
 class OrdersController
@@ -105,5 +106,25 @@ class OrdersController
             'error' => false,
             'message' => 'Product successfully removed.'
         ]);
+    }
+
+    public function index()
+    {
+        try {
+            $user = User::where('email', 'john@doe.com')->first();
+
+            $orders = Order::where('user_id', $user->id)->get()->all();
+
+            return response()->json([
+                'error' => false,
+                'orders' => $orders
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 }

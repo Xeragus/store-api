@@ -20,8 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('products')->group(function () {
     Route::get('/', 'ProductsController@index'); // api/products
     Route::post('/create', 'ProductsController@create'); // api/products/create
-    Route::get('/get-by-name', 'ProductsController@getByName'); // api/products/get-by-name
-    Route::get('/{id}', 'ProductsController@getById'); // api/products/{id}
+    Route::get('/{id}', 'ProductsController@show'); // api/products/{id}
     Route::delete('/{id}', 'ProductsController@delete'); // api/products/{id}
     Route::get('/{id}/company', 'ProductsController@getCompany'); // api/products/{id}/company
 });
@@ -30,6 +29,7 @@ Route::prefix('orders')->group(function (){
     Route::post('/add-product', 'OrdersController@addProduct');
     Route::post('/remove-product', 'OrdersController@removeProduct');
     Route::get('/', 'OrdersController@index');
+    Route::post('/add-product-to-order', 'AddProductToOrderController@addProduct');
 });
 
 Route::prefix('companies')->group(function () {
@@ -48,18 +48,15 @@ Route::prefix('users')->group(function() {
 });
 
 Route::prefix('locations')->group(function () {
-    Route::get('/','LocationIndexController@index');
-    Route::get('/{id}', 'LocationShowController@show');
+    Route::get('/','LocationController@index');
+    Route::get('/{id}', 'LocationController@show');
     Route::delete('/{id}', 'LocationDeleteController@delete');
-    Route::post('/create', 'LocationCreateController@create');
+    Route::post('/create', 'LocationController@create');
 });
 
 Route::prefix('categories')->group(function (){
-//    Route::get('/', 'CategoriesIndexController@index');
-//    Route::get('/{id}', 'CategoriesShowController@show');
-//    Route::post('/create', 'CategoriesCreateController@create');
-//    Route::delete('/{id}', 'CategoriesDeleteController@delete');
-
-    Route::post('/create-with-command', 'CategoriesController@createWithCommand');
-    Route::post('/create-with-factory', 'CategoriesController@createWithFactory');
+    Route::post('/create', 'CategoriesController@create');
+    Route::delete('/delete', 'CategoriesController@delete');
+    Route::get('/', 'CategoriesController@index');
+    Route::get('/{id}', 'CategoriesController@show');
 });

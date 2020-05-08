@@ -11,9 +11,9 @@ class ProductFactory
     {
         $product = new Product();
 
-        $product->setPrice($data['price']);
-        $product->setName($data['name']);
-        $product->setDescription($data['description']);
+        $product->setPrice($data->get('price'));
+        $product->setName($data->get('name'));
+        $product->setDescription($data->get('description'));
         $product->setCompany($company);
 
         return $product;

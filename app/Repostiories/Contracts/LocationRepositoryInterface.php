@@ -12,11 +12,8 @@ interface LocationRepositoryInterface
 
     public function get(int $id) : ?Location;
 
+    public function findOrFail(int $id) : ?Location;
+
     public function delete(Location $location);
 
-    public function getByAddress(string $address) : array;
-
-    public function getByNumber(int $num) : array;
-
-    public function getByCorrectAddress(string $address) : array ;
 }
