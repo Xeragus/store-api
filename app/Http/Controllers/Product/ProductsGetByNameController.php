@@ -9,7 +9,7 @@ use App\Repositories\Contracts\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 
 
-class ProductsController extends Controller
+class ProductsGetByNameController extends Controller
 {
 	private $productRepository;
 

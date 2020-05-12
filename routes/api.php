@@ -23,8 +23,11 @@ Route::prefix('products')->group(function () {
         Route::post('/create', 'ProductsController@create'); // api/products/create
         Route::get('/get-by-name', 'ProductsController@getByName'); // api/products/get-by-name
         Route::get('/{id}', 'ProductsController@getById'); // api/products/{id}
-        Route::delete('/{id}', 'ProductsController@delete'); // api/products/{id}
-        Route::get('/{id}/company', 'ProductsController@getCompany'); // api/products/{id}/company
+        Route::get('/{id}/company', 'ProductsController@company'); // api/products/{id}/company
+
+        Route::group(['middleware' => 'product.ownership'], function() {
+            Route::delete('/{id}', 'ProductsController@delete'); // api/products/{id}
+        });
     });
 });
 

@@ -11,7 +11,9 @@ class Product extends Model
     protected $fillable = [
         'name',
         'description',
-        'price'
+        'price',
+        'company_id',
+        'category_id'
     ];
 
     public function getId(): int

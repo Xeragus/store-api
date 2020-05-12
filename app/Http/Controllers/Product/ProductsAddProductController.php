@@ -7,7 +7,7 @@ use App\Product;
 use App\Repositories\Contracts\CompanyRepositoryInterface;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use Illuminate\Http\Request;
-class ProductsController extends Controller
+class ProductsAddProductController extends Controller
 {
     /**
      * @var ProductRepositoryInterface
