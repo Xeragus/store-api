@@ -13,4 +13,6 @@ interface CompanyRepositoryInterface
     public function store(Company $company);
 
     public function all(): array;
+
+    public function delete(Company $company);
 }

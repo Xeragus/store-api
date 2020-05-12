@@ -26,4 +26,9 @@ class EloquentCompanyRepository implements CompanyRepositoryInterface
     {
         return Company::all()->all();
     }
+
+    public function delete(Company $company)
+    {
+        $company->delete();
+    }
 }

@@ -43,6 +43,8 @@ Route::prefix('companies')->group(function () {
         Route::group(['middleware' => 'company.ownership'], function() {
             Route::get('/{id}', 'CompaniesIndexController@getCompany'); // /companies/{id}
             Route::get('/{id}/products', 'CompaniesProductsController@getProducts'); // /companies/{id}/products
+            Route::post('/{id}', 'CompaniesUpdateController@update');
+            Route::delete('/{id}', 'CompaniesDeleteController@delete');
         });
     });
 });
