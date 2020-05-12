@@ -27,6 +27,7 @@ Route::prefix('products')->group(function () {
 
         Route::group(['middleware' => 'product.ownership'], function() {
             Route::delete('/{id}', 'ProductsController@delete'); // api/products/{id}
+            Route::post('/{id}', 'ProductUpdateController@update');
         });
     });
 });
