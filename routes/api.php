@@ -33,11 +33,16 @@ Route::prefix('orders')->group(function (){
 });
 
 Route::prefix('companies')->group(function () {
-  Route::get('/', 'CompaniesIndexController@index'); // /companies
-  Route::post('/create', 'CompaniesCreateController@create')
-      ->middleware(\App\Http\Middleware\CheckCompanyCreateData::class); // /companies
-  Route::get('/{id}', 'CompaniesIndexController@getCompany'); // /companies/{id}
-  Route::get('/{id}/products', 'CompaniesProductsController@getProducts'); // /companies/{id}/products
+    Route::get('/', 'CompaniesIndexController@index');
+    Route::post('/create', 'CompaniesCreateController@create')
+        ->middleware(\App\Http\Middleware\CheckCompanyCreateData::class);
+
+  Route::group(['middleware' => 'company.ownership'], function (){
+      Route::get('/{id}', 'CompaniesIndexController@getCompany');
+      Route::get('/{id}/products', 'CompaniesProductsController@getProducts');
+      Route::delete('/{id}', 'CompaniesDeleteController@delete');
+      Route::post('/update/{id}', 'CompaniesUpdateController@update');
+  });
 });
 
 Route::prefix('users')->group(function() {

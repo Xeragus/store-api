@@ -9,7 +9,17 @@ class Company extends Model
 {
     protected $table = 'companies';
 
-    protected $fillable = ['name', 'address', 'email'];
+    protected $fillable = ['name', 'address', 'email', 'user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
 
     public function getId(): int
     {

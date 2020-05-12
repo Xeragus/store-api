@@ -50,6 +50,16 @@ class User extends Authenticatable implements JWTSubject
         'password', 'updated_at'
     ];
 
+    public function companies()
+    {
+        return $this->hasMany('App\Company');
+    }
+
+    public function getCompanies()
+    {
+        return $this->companies;
+    }
+
     public function getId(): int
     {
         return (int) $this->getAttribute('id');

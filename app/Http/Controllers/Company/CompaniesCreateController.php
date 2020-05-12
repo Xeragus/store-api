@@ -12,13 +12,10 @@ class CompaniesCreateController extends Controller
     public function create(Request $request, CompanyRepositoryInterface $companyRepository)
     {
         try {
-//            dispatch_now(new CreateCompanyCommand(
-//                $request->get('name'),
-//                $request->get('address'),
-//                $request->get('email')
-//            ));
+            $data = $request->all();
+            $data['user_id'] = auth()->getUser()->getId();
 
-            dispatch_now(new CreateCompanyFromDataCommand($request->all()));
+            dispatch_now(new CreateCompanyFromDataCommand($data));
 
         } catch (\Exception $e) {
             return response()->json([
