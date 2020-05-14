@@ -39,10 +39,9 @@ Route::prefix('orders')->group(function (){
 });
 
 Route::prefix('companies')->group(function () {
-    Route::group(['middleware' => 'auth:api'], function() {
+    Route::group([], function() {
         Route::get('/', 'CompaniesIndexController@index'); // /companies
-        Route::post('/create', 'CompaniesCreateController@create')
-            ->middleware(\App\Http\Middleware\CheckCompanyCreateData::class); // /companies
+        Route::post('/create', 'CompaniesCreateController@create'); // /companies
 
         Route::group(['middleware' => 'company.ownership'], function() {
             Route::get('/{id}', 'CompaniesIndexController@getCompany'); // /companies/{id}

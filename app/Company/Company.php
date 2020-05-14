@@ -21,6 +21,11 @@ class Company extends Model
         return $this->user;
     }
 
+    public function setUser(User $user)
+    {
+        $this->user()->associate($user);
+    }
+
     public function getId(): int
     {
         return (int) $this->getAttribute('id');
@@ -63,5 +68,43 @@ class Company extends Model
         $this->setAttribute('address', $address);
     }
 
+    public function type()
+    {
+        return $this->belongsTo(CompanyType::class, 'type_id', 'id');
+    }
 
+    public function setType(CompanyType $type)
+    {
+        $this->type()->associate($type);
+    }
+
+    public function getType(): ?CompanyType
+    {
+        return $this->type()->get()->first();
+    }
+
+    public function deliveryCompany()
+    {
+        return $this->belongsTo(Company::class, 'delivery_company_id', 'id');
+    }
+
+    public function getDeliveryCompany(): ?Company
+    {
+        return $this->deliveryCompany;
+    }
+
+    public function setDeliveryCompany(Company $company)
+    {
+        $this->deliveryCompany()->associate($company);
+    }
+
+    public function deliveringCompanies()
+    {
+        return $this->hasMany(Company::class,'delivery_company_id', 'id');
+    }
+
+    public function getDeliveringCompanies(): array
+    {
+        $this->deliveringCompanies;
+    }
 }
